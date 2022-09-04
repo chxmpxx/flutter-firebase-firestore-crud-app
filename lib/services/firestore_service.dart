@@ -15,7 +15,8 @@ class FirestoreService {
   // ฟังก์ชันอ่านข้อมูล
   // Stream คล้าย Future เป็น asynchronous เหมือนกัน
   Stream<List<Product>> getProducts(){
-    return _db.collection('products').orderBy('createdOn', descending: true)
+    // descending:true = เรียงจากราคามากสุดไปน้อยสุด
+    return _db.collection('products').orderBy('price', descending: true)
               .snapshots().map((snapshot) => snapshot.docs.map((document) => Product.fromFirestore(document.data())).toList());
   }
 
